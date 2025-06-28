@@ -110,15 +110,16 @@
 
   <script>
     const numeroCompra = localStorage.getItem("numeroCompra") || Math.floor(Math.random() * 90000 + 10000);
-    const nombreCliente = localStorage.getItem("nombreCliente") || "Cliente";
-    const telefono = localStorage.getItem("telefonoCliente") || "1123456789";
+const nombreCliente = localStorage.getItem("nombreCliente") || "Cliente";
+const telefono = localStorage.getItem("telefonoCliente") || "1123456789";
 
-    document.getElementById("numero-compra-text").textContent =
-      "Tu número de compra es: #" + numeroCompra;
+document.getElementById("numero-compra-text").textContent =
+  "Tu número de compra es: #" + numeroCompra;
 
-    const mensaje = `Hola soy ${nombreCliente}. Realicé una compra con el número de orden #${numeroCompra}.`;
-    const urlWhatsApp = `https://wa.me/54${telefono}?text=${encodeURIComponent(mensaje)}`;
-    document.getElementById("btn-whatsapp").href = urlWhatsApp;
+const mensaje = `Hola soy ${nombreCliente}. Realicé una compra con el número de orden #${numeroCompra}.`;
+const urlWhatsApp = `https://wa.me/54${telefono}?text=${encodeURIComponent(mensaje)}`;
+document.getElementById("btn-whatsapp").href = urlWhatsApp;
+
   </script>
 
 </body>
