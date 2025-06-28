@@ -262,8 +262,17 @@
  setTimeout(() => {
   const metodoPago = document.getElementById('pago').value;
   if (metodoPago === "Mercado Pago") {
-    window.location.href = "https://mpago.la/26CXZnQ"; // Link de prueba de $1
-  } else {
+  const url = `https://mpago.la/26CXZnQ`;
+
+  // Guardar datos en LocalStorage
+  localStorage.setItem("orden", numeroCompra);
+  localStorage.setItem("telefono", telefono);
+  localStorage.setItem("nombre", nombreCliente);
+
+  // Redirigir a Mercado Pago
+  window.location.href = url;
+}
+ else {
     // Mostrar mensaje de éxito sin redirección
     document.getElementById("success").style.display = "block";
     document.getElementById("numero-compra-text").textContent =
