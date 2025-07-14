@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gracias por tu compra</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --claro: #f4efe9;
+      --marron: #5c4033;
+      --oscuro: #1a1a1a;
+      --suave: #fdfaf5;
+      --verde: #2e7031;
+    }
+
+    body {
+      background-color: var(--claro);
+      font-family: 'Playfair Display', serif;
+      color: var(--marron);
+      padding: 2rem;
+      margin: 0;
+    }
+
+    main {
+      max-width: 650px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .success-message {
+      background-color: var(--suave);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .success-message h3 {
+      color: var(--verde);
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+    }
+
+    .success-message small {
+      display: block;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .btn-secondary {
+      background-color: var(--oscuro);
+      color: var(--claro);
+      padding: 0.7rem 1.2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 1rem;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background-color: #000;
+    }
+
+    #datos-transferencia {
+      display: none;
+      background-color: var(--suave);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+      border: 1px solid #d3c1ae;
+    }
+
+    #datos-transferencia h4 {
+      margin-top: 0;
+    }
+
+    #numero-compra-text {
+      font-weight: bold;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <main>
+
+    <div id="datos-transferencia">
+      <h4>📄 Datos para Transferencia</h4>
+      <p>Alias: <strong>mitienda.banco</strong></p>
+      <p>CBU: <strong>0000000000000000000000</strong></p>
+      <p>Banco: <strong>Banco Nación</strong></p>
+      <p>Una vez realizada la transferencia, envianos el comprobante por WhatsApp.</p>
+    </div>
+
+    <div class="success-message" id="success">
+      <h3>✅ Compra realizada con éxito</h3>
+      <p>Muchas gracias por tu compra.</p>
+      <small>Se ha enviado un ticket digital a tu correo.</small>
+      <p id="numero-compra-text">Tu número de compra es: #0000</p>
+      <a id="btn-whatsapp" href="#" target="_blank" class="btn-secondary">📦 Coordinar envío por WhatsApp</a>
+      <br>
+      <a href="index.html" class="btn-secondary">⬅ Volver al inicio</a>
+    </div>
+  </main>
+
+  <script>
+    const numeroCompra = localStorage.getItem("numeroCompra") || Math.floor(Math.random() * 90000 + 10000);
+const nombreCliente = localStorage.getItem("nombreCliente") || "Cliente";
+const telefono = localStorage.getItem("telefonoCliente") || "1123456789";
+
+document.getElementById("numero-compra-text").textContent =
+  "Tu número de compra es: #" + numeroCompra;
+
+const mensaje = `Hola soy ${nombreCliente}. Realicé una compra con el número de orden #${numeroCompra}.`;
+const urlWhatsApp = ``;
+document.getElementById("btn-whatsapp").href = urlWhatsApp;
+
+  </script>
+
+</body>
+</html>
