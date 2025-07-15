@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Finalizar Compra | Adamantium</title>
+  <link rel="icon" href="logo-adamantium.jpg" type="image/jpeg" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --claro: #eee7de;
+      --marron: #5c4033;
+      --oscuro: #1a1a1a;
+    }
+    body {
+      background-color: var(--claro);
+      font-family: 'Playfair Display', serif;
+      color: var(--marron);
+      padding: 2rem;
+    }
+    .checkout-container {
+      max-width: 700px;
+      margin: auto;
+      padding: 2.5rem;
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+      color: var(--oscuro);
+    }
+    label {
+      display: block;
+      margin-top: 1.2rem;
+      font-weight: bold;
+      color: var(--marron);
+    }
+    input, select {
+      width: 100%;
+      padding: 0.9rem;
+      margin-top: 0.3rem;
+      border-radius: 10px;
+      border: 1px solid #d8c8b8;
+      background-color: #fdfaf5;
+      font-size: 1rem;
+      color: var(--oscuro);
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    #precio {
+      font-weight: bold;
+      color: var(--oscuro);
+      font-size: 1.2rem;
+    }
+    button {
+      margin-top: 2rem;
+      width: 100%;
+      padding: 1rem;
+      background-color: var(--marron);
+      color: var(--claro);
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: var(--oscuro);
+    }
+    .success-message {
+      display: none;
+      margin-top: 2rem;
+      padding: 2rem;
+      background-color: #f7f2ec;
+      border: 1px solid #d3c1ae;
+      border-radius: 16px;
+      text-align: center;
+    }
+    .success-message h3 {
+      color: #2e7031;
+      margin-bottom: 1rem;
+    }
+    .success-message small {
+      color: var(--marron);
+      font-size: 0.9rem;
+    }
+    .btn-secondary {
+      background-color: var(--oscuro);
+      color: var(--claro);
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.7rem 1.2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+    .btn-secondary:hover {
+      background-color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="checkout-container">
+    <h2 id="checkout-title">Finalizar Orden</h2>
+
+    <form id="checkout-form" method="POST" target="invisible_iframe">
+
+      <label for="nombre">Nombre completo</label>
+      <input type="text" id="nombre" name="nombre" required />
+
+      <label for="email">Correo electrónico</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="telefono">Teléfono</label>
+      <input type="tel" id="telefono" name="telefono" required />
+
+      <label for="modelo">Modelo</label>
+      <select id="modelo" name="modelo" required>
+        <option value="">Seleccioná un modelo</option>
+        <option value="VOGUE">VOGUE</option>
+        <option value="BLAZE">BLAZE</option>
+      </select>
+
+      <label for="tamano">Tamaño</label>
+      <select id="tamano" name="tamano" required>
+        <option value="">Seleccioná un tamaño</option>
+        <option value="130x60cm">130x60cm</option>
+        <option value="150x60cm">150x60cm</option>
+        <option value="160x60cm">160x60cm</option>
+        <option value="170x60cm">170x60cm</option>
+        <option value="180x60cm">180x60cm</option>
+      </select>
+
+      <label for="color">Color</label>
+      <select id="color" name="color" required>
+        <option value="">Seleccioná un color</option>
+        <option value="Petrifí">Petrifí</option>
+        <option value="Roble Claro">Roble Claro</option>
+        <option value="Roble Oscuro">Roble Oscuro</option>
+        <option value="Cedro">Cedro</option>
+        <option value="Caoba">Caoba</option>
+        <option value="Nogal">Nogal</option>
+        <option value="Viraró">Viraró</option>
+        <option value="Wengué">Wengué</option>
+        <option value="Algarrobo">Algarrobo</option>
+      </select>
+
+      <div class="row">
+  <label>Precio:</label>
+  <span id="precio">Coordinar</span>
+</div>
+
+
+      <label for="direccion">Dirección de envío</label>
+      <input type="text" id="direccion" name="direccion" required />
+
+      <label for="comentario">Comentario adicional (opcional)</label>
+      <input type="text" id="comentario" name="comentario" placeholder="Ej. horario de entrega, detalles de envío" />
+
+
+
+      <input type="hidden" id="producto" name="producto" />
+<input type="hidden" id="numero_compra" name="numero_compra" />
+<input type="hidden" id="precio_hidden" name="precio" />
+<button type="submit">Finalizar Orden</button>
+
+
+    </form>
+
+
+
+    <div class="success-message" id="success">
+      <h3>✅ Compra realizada con éxito</h3>
+      <p>Muchas gracias por tu compra.</p>
+      <small>Se ha enviado un ticket digital a tu correo.</small>
+      <p id="numero-compra-text"></p>
+      <a id="btn-whatsapp" href="#" target="_blank" class="btn-secondary">
+        📦 Coordinar envío por WhatsApp
+      </a>
+      <br>
+      <a href="index.html" class="btn-secondary">⬅ Volver al inicio</a>
+    </div>
+  </div>
+
+  <iframe name="invisible_iframe" style="display:none;"></iframe>
+
+<script>
+
+
+
+  document.getElementById('checkout-form').addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  const modelo = document.getElementById('modelo').value;
+  const tamano = document.getElementById('tamano').value;
+  const color = document.getElementById('color').value;
+
+  if (!modelo || !tamano || !color) {
+    alert("Por favor, completá todos los campos de producto.");
+    return;
+  }
+
+  const numeroCompra = Math.floor(1000 + Math.random() * 9000);
+  const nombreCliente = document.getElementById('nombre').value || "Cliente";
+
+  document.getElementById('numero_compra').value = "#" + numeroCompra;
+
+  const productoNombre = `${modelo} - ${tamano} - ${color}`;
+  document.getElementById('producto').value = productoNombre;
+
+
+// Creamos un objeto con la información de la compra
+const compra = {
+  numero: numeroCompra,
+  producto: productoNombre,
+  fecha: new Date().toLocaleString()
+};
+
+// Recuperamos compras previas (si existen)
+const comprasPrevias = JSON.parse(localStorage.getItem("compras")) || [];
+
+// Agregamos la nueva compra
+comprasPrevias.push(compra);
+
+// Guardamos el array actualizado
+localStorage.setItem("compras", JSON.stringify(comprasPrevias));
+
+  const form = document.getElementById('checkout-form');
+  form.setAttribute('action', 'https://script.google.com/macros/s/AKfycbyTx8IQaoDpz4YP22YPmNMaxzW_yLlkcEo8LrVaYg5P5-01Jz-rT2AVb1CQJa5WbrBOzw/exec');
+
+
+
+  document.getElementById('loader').style.display = 'flex';
+
+
+  form.submit();
+
+
+setTimeout(() => {
+  document.querySelector(".checkout-container form").style.display = "none";
+  document.getElementById("success").style.display = "block";
+  document.getElementById("numero-compra-text").textContent =
+    "Tu número de compra es: #" + numeroCompra;
+
+  const telefono = document.getElementById("telefono").value.replace(/\D/g, "");
+  const mensaje = `Hola soy ${nombreCliente}. Realicé una orden con el número de orden #${numeroCompra}.`;
+  const urlWhatsApp = `https://wa.me/549${telefono}?text=${encodeURIComponent(mensaje)}`;
+  document.getElementById("btn-whatsapp").href = urlWhatsApp;
+
+  document.getElementById("loader").style.display = "none";
+}, 1500);
+
+
+
+});
+
+</script>
+<script>
+  function getQueryParams() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+      modelo: params.get("modelo") || "",
+      tamano: params.get("tamano") || "",
+      color: params.get("color") || ""
+    };
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const { modelo, tamano, color } = getQueryParams();
+
+    if (modelo) {
+      const modeloSelect = document.getElementById("modelo");
+      modeloSelect.value = modelo.toUpperCase();
+      modeloSelect.disabled = true;
+    }
+
+    if (tamano) {
+      const tamanoSelect = document.getElementById("tamano");
+      tamanoSelect.value = tamano + "cm";
+      tamanoSelect.disabled = true;
+
+      const preciosPorTamano = {
+        "130x60cm": 200000,
+        "150x60cm": 250000,
+        "160x60cm": 260000,
+        "170x60cm": 270000,
+        "180x60cm": 280000
+      };
+
+    document.getElementById("precio").textContent = "Coordinar";      document.getElementById("precio_hidden").value = "";
+
+    }
+
+    if (color) {
+  const colorSelect = document.getElementById("color");
+
+
+  const colorMap = {
+    "petrifi": "Petrifí",
+    "roble-claro": "Roble Claro",
+    "roble-oscuro": "Roble Oscuro",
+    "cedro": "Cedro",
+    "caoba": "Caoba",
+    "nogal": "Nogal",
+    "viraro": "Viraró",
+    "wengue": "Wengué",
+    "algarrobo": "Algarrobo"
+  };
+
+  const traducido = colorMap[color.toLowerCase()];
+  if (traducido) {
+    colorSelect.value = traducido;
+    colorSelect.disabled = true;
+  }
+}
+
+  });
+</script>
+<div id="loader" style="
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.9);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  font-size: 1.2em;
+  color: #333;">
+  <div>
+    <img src="https://i.imgur.com/llF5iyg.gif" alt="Cargando..." style="width:50px;display:block;margin:auto;">
+    <p style="text-align:center;">Procesando tu compra...</p>
+  </div>
+</div>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+  import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAE01dHesErmpCOFZmpMaUtOoN3UY3n7O8",
+    authDomain: "base-de-datos-49bfa.firebaseapp.com",
+    projectId: "base-de-datos-49bfa",
+    storageBucket: "base-de-datos-49bfa.firebasestorage.app",
+    messagingSenderId: "293301090466",
+    appId: "1:293301090466:web:3a04274b5d2b463772bffb"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  // Guardar datos al enviar formulario
+  document.getElementById('checkout-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const telefono = document.getElementById('telefono').value;
+    const direccion = document.getElementById('direccion').value;
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        await setDoc(doc(db, "usuarios", user.uid), {
+          telefono: telefono,
+          direccion: direccion
+        }, { merge: true });
+      }
+    });
+
+    // A partir de aquí, podés dejar tu lógica de compra (redirección, mostrar loader, etc.)
+    // Para que no se rompa tu flujo, re-llamamos tu submit original:
+    document.getElementById('checkout-form').submit();
+  });
+</script>
+
+</body>
+</html>

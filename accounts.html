@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link href="style.css" rel="stylesheet"/>
+  <title>Mi Cuenta</title>
+  <style>
+    .tabs {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+      border-bottom: 2px solid #ccc;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .tab {
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+      font-weight: bold;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease;
+    }
+    .tab.active {
+      border-color: #5c4033;
+      color: #5c4033;
+    }
+    .content {
+      max-width: 700px;
+      margin: 2rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .hidden {
+      display: none;
+    }
+    button {
+      background: #5c4033;
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    input[type="password"] {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.6rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+
+<body>
+<header class="header">
+  <div class="header-inner">
+    <h1 class="logo-nombre">ADAMANTIUM</h1>
+    <button class="hamburger-menu" aria-label="Abrir menú">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </div>
+  <nav class="nav-menu">
+    <ul>
+      <li><a href="index.html#top">Inicio</a></li>
+      <li><a href="index.html#quienes-somos">La Marca</a></li>
+      <li><a href="index.html#servicios-personalizados">Servicios</a></li>
+      <li><a href="index.html#productos">Escritorios</a></li>
+      <li><a href="index.html#contacto">Contacto</a></li>
+      <li><a href="index.html#tienda-section">Tienda</a></li>
+      <li><a href="accounts.html">Mi Cuenta</a></li>
+    </ul>
+  </nav>
+</header>
+
+
+  <main class="container">
+    <div class="tabs">
+      <div class="tab active" data-tab="datos">Mis datos</div>
+      <div class="tab" data-tab="compras">Mis compras</div>
+      <div class="tab" data-tab="seguridad">Seguridad</div>
+    </div>
+
+    <div class="content" id="datos">
+      <h2>Mis datos</h2>
+      <p><strong>Email:</strong> <span id="user-email"></span></p>
+      <p><strong>Teléfono:</strong> <span id="user-phone">No disponible</span></p>
+      <p><strong>Dirección:</strong> <span id="user-address">No disponible</span></p>
+    </div>
+
+    <div class="content hidden" id="compras">
+      <h2>Mis compras</h2>
+      <div id="lista-compras">
+        <p>No tienes compras registradas.</p>
+      </div>
+    </div>
+
+    <div class="content hidden" id="seguridad">
+      <h2>Seguridad</h2>
+      <button id="logout">Cerrar sesión</button>
+      <h3 style="margin-top: 2rem;">Cambiar contraseña</h3>
+      <input type="password" id="nueva-contrasena" placeholder="Nueva contraseña">
+      <button id="btn-cambiar-contrasena">Actualizar contraseña</button>
+      <p id="mensaje-contrasena" style="color: green; margin-top: 0.5rem;"></p>
+    </div>
+  </main>
+
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.querySelector('.hamburger-menu');
+  const navMenu = document.querySelector('.nav-menu');
+  hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    hamburger.classList.toggle('active');
+  });
+
+  // Tabs (mover aquí para que funcione bien)
+  const tabs = document.querySelectorAll('.tab');
+  const contents = document.querySelectorAll('.content');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      contents.forEach(c => c.classList.add('hidden'));
+      document.getElementById(tab.dataset.tab).classList.remove('hidden');
+    });
+  });
+});
+
+  </script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut, updatePassword } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAE01dHesErmpCOFZmpMaUtOoN3UY3n7O8",
+      authDomain: "base-de-datos-49bfa.firebaseapp.com",
+      projectId: "base-de-datos-49bfa",
+      storageBucket: "base-de-datos-49bfa.appspot.com",
+      messagingSenderId: "293301090466",
+      appId: "1:293301090466:web:3a04274b5d2b463772bffb"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        document.getElementById('user-email').textContent = user.email;
+
+        const docSnap = await getDoc(doc(db, "usuarios", user.uid));
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          document.getElementById('user-phone').textContent = data.telefono || "No disponible";
+          document.getElementById('user-address').textContent = data.direccion || "No disponible";
+        }
+      } else {
+        document.getElementById('user-email').textContent = "No has iniciado sesión";
+        document.getElementById('user-phone').textContent = "-";
+        document.getElementById('user-address').textContent = "-";
+        document.getElementById('logout').style.display = "none";
+        document.querySelector('.tab[data-tab="compras"]').style.display = "none";
+      }
+    });
+
+    document.getElementById('logout').addEventListener('click', () => {
+      signOut(auth).then(() => {
+        window.location.href = "index.html";
+      });
+    });
+
+    // Mostrar compras guardadas
+    const comprasContainer = document.getElementById("lista-compras");
+    const comprasGuardadas = JSON.parse(localStorage.getItem("compras")) || [];
+    if (comprasGuardadas.length === 0) {
+      comprasContainer.innerHTML = "<p>No tienes compras registradas.</p>";
+    } else {
+      comprasContainer.innerHTML = comprasGuardadas.map(c => `
+        <div style="border:1px solid #ddd; border-radius:8px; padding:1rem; margin-bottom:1rem; background:#f9f9f9;">
+          <p><strong>Número de compra:</strong> #${c.numero}</p>
+          <p><strong>Producto:</strong> ${c.producto}</p>
+          <p><strong>Fecha:</strong> ${c.fecha}</p>
+        </div>
+      `).join("");
+    }
+
+    // Cambiar contraseña
+    document.getElementById('btn-cambiar-contrasena').addEventListener('click', async () => {
+      const nuevaPass = document.getElementById('nueva-contrasena').value.trim();
+      const mensaje = document.getElementById('mensaje-contrasena');
+
+      if (nuevaPass.length < 6) {
+        mensaje.style.color = "red";
+        mensaje.textContent = "La contraseña debe tener al menos 6 caracteres.";
+        return;
+      }
+
+      try {
+        const user = auth.currentUser;
+        if (user) {
+          await updatePassword(user, nuevaPass);
+          mensaje.style.color = "green";
+          mensaje.textContent = "Contraseña actualizada correctamente.";
+        } else {
+          mensaje.style.color = "red";
+          mensaje.textContent = "No hay usuario logueado.";
+        }
+      } catch (error) {
+        mensaje.style.color = "red";
+        mensaje.textContent = "Error al cambiar la contraseña.";
+      }
+    });
+  </script>
+</body>
+</html>
