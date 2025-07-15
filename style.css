@@ -1280,3 +1280,15 @@ main.container {
   margin-top: 0.25rem;
   font-size: 0.9em;
 }
+
+@media (max-width: 480px) {
+  .hero-content h1 {
+    font-size: 1.5rem;
+  }
+  .hero-content p {
+    font-size: 0.9rem;
+  }
+  .hero-content {
+    padding: 1.5rem 1rem;
+  }
+}
