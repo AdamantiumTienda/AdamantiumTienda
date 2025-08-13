@@ -63,11 +63,12 @@
   <div class="escritorios-grid">
 
     <div class="escritorio-card">
-      <img alt="Escritorio Industrial Mueble 1" src="Images/Blaze1.jpg"/>
-      <h3>Blaze</h3>
-      <p>Diseño contundente con espíritu gamer. Estructura de hierro de 3 cm y melamina negra mate para un estilo moderno y funcional.</p>
-      <a class="btn-pedir" href="javascript:void(0);" onclick="openModal('2')">Pedir este</a>
-    </div>
+  <img alt="Adamantium Trinity Desk" src="Images/TrinityDesk1.jpg"/>
+  <h3>Adamantium Trinity Desk</h3>
+  <p>Potencia tu setup con diseño y estilo. Tres cajoneras para máxima organización.</p>
+  <a class="btn-pedir" href="javascript:void(0);" onclick="openModal('2')">Pedir este</a>
+</div>
+
 
     <div class="escritorio-card">
   <img alt="Escritorio Adamantium Drawer" src="Images/ImagesDrawer1.jpg"/>
@@ -163,10 +164,13 @@
 </div>
 
     <div class="escritorio-card product-item" data-product-id="2">
-      <img alt="Mueble Modelo Blaze" src="Images/Blaze1.jpg"/>
-      <h3>Blaze</h3>
-      <p class="descripcion-corta">Diseño contundente y Espíritu gamer.</p>
-      <span class="precio">Coordinar</span>
+  <img alt="Adamantium Trinity Desk" src="Images/TrinityDesk1.jpg"/>
+  <h3>Adamantium Trinity Desk</h3>
+  <p class="descripcion-corta">Potencia tu setup con diseño y estilo. Tres cajoneras para máxima organización.</p>
+  <span class="precio">Coordinar</span>
+  <button class="btn-producto btn-ver-detalles">Ver Detalles</button>
+</div>
+
 
       <button class="btn-producto btn-ver-detalles">Ver Detalles</button>
     </div>
@@ -258,13 +262,23 @@
 <script>
 const productosData = {
   "2": {
-    nombre: "Blaze",
-    imagenes: ["Images/Blaze1.jpg", "Images/Blaze2.jpg"],
-    medidas: `150 cm (Ancho) x 60 cm (Prof.) x 74 cm (Alto).(Medida estándar – otras medidas disponibles a pedido)`,
-    materiales: "Hierro macizo de 3 cm con acabado negro mate y superficie en melamina negra de alta resistencia.",
-    precio: "Coordinar",
-    descripcionLarga: "Diseño sobrio y poderoso. Ideal para setups gamer o estaciones creativas. Su estructura de hierro y melamina negra lo convierten en una pieza funcional, resistente y con carácter."
-  },
+  nombre: "Adamantium Trinity Desk",
+  imagenes: [
+    "Images/TrinityDesk1.jpg",
+    "Images/TrinityDesk2.jpg",
+    "Images/TrinityDesk3.jpg"
+  ],
+  medidas: `150 cm (Ancho) x 60 cm (Prof.) x 74 cm (Alto) con tres cajoneras. (Medida estándar – otras medidas disponibles a pedido)`,
+  materiales: "Madera maciza y estructura robusta de hierro.",
+  precio: "Coordinar",
+  descripcionLarga: `Trinity Desk – Potencia tu setup con diseño y estilo
+
+Diseñado para quienes exigen rendimiento, orden y estética, el Trinity Desk combina la nobleza de la madera maciza con una estructura robusta y envolvente. Sus tres cajoneras ofrecen espacio de sobra para organizar accesorios, periféricos y todo lo que tu mundo gamer necesita al alcance de la mano.
+
+La superficie amplia y firme está pensada para setups potentes, múltiples monitores y largas sesiones de juego o streaming, sin perder la elegancia y calidez del diseño artesanal.`,
+  descripcionCorta: "Potencia tu setup con diseño y estilo. Tres cajoneras para máxima organización."
+}
+,
   "3": {
     nombre: "Adamantium Drawer",
     imagenes: ["Images/ImagesDrawer1.jpg", "Images/ImagesDrawer2.jpg", "Images/ImagesDrawer3.jpg"],
@@ -875,6 +889,7 @@ if (window.innerWidth < 769) {
 
 </body>
 </html>
+
 
 
 
