@@ -881,10 +881,25 @@ if (window.innerWidth < 769) {
   });
 </script>
 
+<script>
+const navLinksInicio = document.querySelectorAll('a[href="#top"], a[href="index.html#top"]');
+
+navLinksInicio.forEach(navLinkInicio => {
+  navLinkInicio.addEventListener('click', (e) => {
+    e.preventDefault();
+    document.querySelectorAll('.page-section, .resenias, .contacto').forEach(sec => sec.style.display = '');
+    document.getElementById('tienda-section').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
 
 
 </body>
 </html>
+
 
 
 
