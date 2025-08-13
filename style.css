@@ -1449,5 +1449,82 @@ main.container {
 
 }
 
+/* ======== FIX MOBILE (<=768px) AFINADO ======== */
+@media (max-width: 768px) {
+
+  /* 1) Títulos fluidos: evitan cortes raros y ocupan mejor el ancho */
+  .section h2,
+  #tienda-section h2 {
+    font-size: clamp(1.4rem, 5.3vw, 1.9rem);
+    line-height: 1.2;
+    letter-spacing: 0.2px;
+    word-break: keep-all;
+  }
+
+  /* 2) Menos padding para ganar ancho real en el contenido */
+  .section,
+  .page-section,
+  .escritorios-destacados,
+  #tienda-section {
+    padding: 1.5rem 1rem;
+  }
+
+  .escritorios-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .escritorio-card {
+    padding: 1rem;
+    border-radius: 14px;
+  }
+  .escritorio-card img {
+    height: 190px;          /* alto consistente en cards */
+    object-fit: cover;
+  }
+
+  /* 3) Header y hamburguesa: siempre visibles por z-index y contraste */
+  header {
+    padding: 0.8rem 1rem;
+    z-index: 2000;          /* por encima del contenido */
+  }
+  .logo-nombre { font-size: 1.3rem; }
+
+  .hamburger-menu {
+    display: flex !important;
+    position: absolute;
+    top: 0.9rem; right: 1rem;
+    width: 32px; height: 32px;
+    z-index: 3000;          /* encima de todo */
+  }
+  .hamburger-menu .bar {
+    background-color: #1a1a1a; /* más contraste en móviles */
+    height: 3px;
+  }
+
+  /* Menú lateral: ancho cómodo y animación clara */
+  .nav-menu {
+    left: -100%;
+    width: 85%;
+    background-color: rgba(250,245,240,0.96);
+    backdrop-filter: blur(6px);
+  }
+  .nav-menu.active { left: 0; }
+
+  /* 4) Compensación de anclas con header fijo (evita que queden “tapadas”) */
+  section.page-section,
+  #tienda-section {
+    padding-top: 80px;
+    margin-top: -80px;
+  }
+
+  /* 5) Modal más ancho en móvil para que no se vea “apretado” */
+  .modal-content {
+    width: 96vw;
+    max-width: 96vw;
+  }
+  .modal-body { gap: 16px; }
+}
+
 
 
