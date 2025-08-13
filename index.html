@@ -70,11 +70,12 @@
     </div>
 
     <div class="escritorio-card">
-      <img alt="Escritorio Rústico Mueble 2" src="Images/Vogue1.jpg"/>
-      <h3>Vogue</h3>
-      <p>Diseño de vanguardia en hierro y eucalipto macizo. Máxima resistencia, estética refinada y funcionalidad. Disponible en múltiples tonos y medidas.</p>
-      <a class="btn-pedir" href="javascript:void(0);" onclick="openModal('3')">Pedir este</a>
-    </div>
+  <img alt="Escritorio Adamantium Drawer" src="Images/ImagesDrawer1.jpg"/>
+  <h3>Adamantium Drawer</h3>
+  <p>Diseño, orden y carácter. Con cajonera lateral de 5 niveles y estructura de hierro forjado.</p>
+  <a class="btn-pedir" href="javascript:void(0);" onclick="openModal('3')">Pedir este</a>
+</div>
+
 
     <div class="escritorio-card">
       <!-- Imagen pendiente de definir -->
@@ -154,13 +155,13 @@
   <h2 style="font-size: 2.5rem; margin-bottom: 2rem; text-align: center; color: #000;">Nuestra Colección para Comprar</h2>
   <div class="escritorios-grid">
     <div class="escritorio-card product-item" data-product-id="3">
-      <img alt="Mueble Modelo Vogue" src="Images/Vogue1.jpg"/>
-      <h3>Vogue</h3>
-      <p class="descripcion-corta">Elegancia suprema y máxima organización.</p>
-      <span class="precio">Coordinar</span>
+  <img alt="Mueble Modelo Adamantium Drawer" src="Images/ImagesDrawer1.jpg"/>
+  <h3>Adamantium Drawer</h3>
+  <p class="descripcion-corta">Diseño, orden y carácter. Con cajonera lateral de 5 niveles y estructura de hierro forjado.</p>
+  <span class="precio">Coordinar</span>
+  <button class="btn-producto btn-ver-detalles">Ver Detalles</button>
+</div>
 
-      <button class="btn-producto btn-ver-detalles">Ver Detalles</button>
-    </div>
     <div class="escritorio-card product-item" data-product-id="2">
       <img alt="Mueble Modelo Blaze" src="Images/Blaze1.jpg"/>
       <h3>Blaze</h3>
@@ -264,13 +265,20 @@ const productosData = {
     descripcionLarga: "Diseño sobrio y poderoso. Ideal para setups gamer o estaciones creativas. Su estructura de hierro y melamina negra lo convierten en una pieza funcional, resistente y con carácter."
   },
   "3": {
-    nombre: "Vogue",
-    imagenes: ["Images/Vogue1.jpg", "Images/Vogue2.jpg", "Images/Vogue3.jpg"],
-    medidas: `150 cm (Ancho) x 60 cm (Prof.) x 74 cm (Alto) con cajonera.(Medida estándar – otras medidas disponibles a pedido)`,
-    materiales: "Madera Petiribí seleccionada y detalles en acero inoxidable.",
+    nombre: "Adamantium Drawer",
+    imagenes: ["Images/ImagesDrawer1.jpg", "Images/ImagesDrawer2.jpg", "Images/ImagesDrawer3.jpg"],
+    medidas: `150 cm (Ancho) x 60 cm (Prof.) x 74 cm (Alto) con cajonera. (Medida estándar – otras medidas disponibles a pedido)`,
+    materiales: "Estructura de hierro forjado y tapa de madera maciza.",
     precio: "Coordinar",
-    descripcionLarga: "Diseño de vanguardia con estructura de hierro de 3 cm y superficie en eucalipto macizo alistonado. Alta resistencia, estética refinada y funcionalidad total para tu espacio. Disponible en varios tonos y medidas."
+    descripcionLarga: `Diseño, orden y carácter.
+
+Este escritorio fue creado para quienes exigen excelencia en cada detalle. Su estructura de hierro forjado aporta presencia y solidez, mientras que la tapa de madera maciza invita a disfrutar del contacto natural en tu espacio personal.
+
+Integra una cajonera lateral de 5 niveles, diseñada para acompañarte en largas sesiones de juego o trabajo. Suaves al tacto, con deslizamiento silencioso y gran capacidad de guardado, pensada tanto para organizar periféricos, como para mantener tu setup impecable.
+
+Ideal para espacios donde el diseño no se negocia.`
   },
+
   "4": {
   nombre: "Kronos",
   imagenes: ["Images/kronos1.jpeg", "Images/kronos2.jpeg", "Images/kronos3.jpeg"],
@@ -858,3 +866,4 @@ if (window.innerWidth < 769) {
 
 </body>
 </html>
+
