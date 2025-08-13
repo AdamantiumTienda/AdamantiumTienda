@@ -78,12 +78,12 @@
 
 
     <div class="escritorio-card">
-      <!-- Imagen pendiente de definir -->
-      <img alt="Escritorio Moderno Mueble 3" src="Images/kronos1.jpeg"/>
-      <h3>Kronos</h3>
-      <p>Diseño industrial robusto y elegante, ideal para setups de alto rendimiento. Hierro de 5 cm y eucalipto macizo se fusionan en un escritorio potente, versátil y con presencia.</p>
-      <a class="btn-pedir" href="javascript:void(0);" onclick="openModal('4')">Pedir este</a>
-    </div>
+  <img src="Images/BuckDuo1.jpg" alt="Adamantium Buck Duo"/>
+  <h3>Adamantium Buck Duo</h3>
+  <p>“Buck Duo” – Doble funcionalidad, diseño total. Dos cajoneras de 5 niveles en un escritorio imponente y versátil.</p>
+  <a class="btn-pedir" href="javascript:void(0);" onclick="openModal('4')">Pedir este</a>
+</div>
+
 
   </div>
 </section>
@@ -171,12 +171,13 @@
       <button class="btn-producto btn-ver-detalles">Ver Detalles</button>
     </div>
     <div class="escritorio-card product-item" data-product-id="4">
-  <img alt="Mueble Modelo Kronos" src="Images/kronos1.jpeg"/>
-  <h3>Kronos</h3>
-  <p class="descripcion-corta">Robustez industrial para setups exigentes. Hierro de 5 cm y eucalipto premium en un diseño imponente y versátil.</p>
+  <img src="Images/BuckDuo1.jpg" alt="Adamantium Buck Duo"/>
+  <h3>Adamantium Buck Duo</h3>
+  <p class="descripcion-corta">Doble funcionalidad, diseño total. Dos cajoneras de 5 niveles para máximo orden.</p>
   <span class="precio">Coordinar</span>
   <button class="btn-producto btn-ver-detalles">Ver Detalles</button>
 </div>
+
 
   </div>
 </section>
@@ -274,14 +275,28 @@ const productosData = {
   },
 
   "4": {
-  nombre: "Kronos",
-  imagenes: ["Images/kronos1.jpeg", "Images/kronos2.jpeg", "Images/kronos3.jpeg"],
-  medidas: `150 cm (Ancho) x 60 cm (Prof.) x 74 cm (Alto).(Medida estándar – otras medidas disponibles a pedido)`,
-  materiales: "Madera eucalipto alistonado de alta densidad con acabado premium. Estructura de hierro de 5 cm de espesor.",
+  nombre: "Adamantium Buck Duo",
+  imagenes: [
+    "Images/BuckDuo1.jpg",
+    "Images/BuckDuo2.jpg",
+    "Images/BuckDuo3.jpg",
+    "Images/BuckDuo4.jpg",
+    "Images/BuckDuo5.jpg"
+  ],
+  medidas: `150 cm (Ancho) x 60 cm (Prof.) x 74 cm (Alto) con doble cajonera. (Medida estándar – otras medidas disponibles a pedido)`,
+  materiales: "Madera maciza. Doble cajonera de cinco niveles.",
   precio: "Coordinar",
-  descripcionLarga: "Kronos combina diseño industrial y espíritu gamer. Su estructura de hierro y tapa de eucalipto garantizan durabilidad y presencia. Viene en tres partes para fácil armado y adaptación. Superficie sólida, disponible en varios tonos.",
-  descripcionCorta: "Diseño industrial robusto y elegante, ideal para setups de alto rendimiento. Hierro de 5 cm y eucalipto macizo se fusionan en un escritorio potente, versátil y con presencia."
+  descripcionLarga: `“Buck Duo” – Doble funcionalidad, diseño total
+
+Imponente, versátil y sobrio.
+El modelo Buck Duo está diseñado para quienes necesitan espacio, orden y carácter en su estación de trabajo. Equipado con dos cajoneras de cinco cajones cada una, este escritorio se convierte en una pieza protagonista tanto en un estudio profesional como en un setup gamer de alto nivel.
+
+Fabricado en madera maciza, combina calidez y resistencia.
+Ideal para organizar herramientas creativas, documentos o accesorios tecnológicos.`
+  ,
+  descripcionCorta: "Doble funcionalidad, diseño total. Dos cajoneras de 5 niveles para máximo orden."
 }
+
 
 };
 
@@ -860,5 +875,6 @@ if (window.innerWidth < 769) {
 
 </body>
 </html>
+
 
 
