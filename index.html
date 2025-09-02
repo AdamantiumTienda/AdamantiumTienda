@@ -895,18 +895,22 @@ const header = document.querySelector("header");
 
 if (window.innerWidth < 769) {
   window.addEventListener("scroll", function() {
+    const navMenu = document.querySelector('.nav-menu');
+
+    // Si el menú hamburguesa está abierto, no ocultar el header ni el botón
+    if (navMenu && navMenu.classList.contains('active')) return;
+
     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
     if (lastScrollTop - currentScroll > 30) {
-  // scroll arriba más de 30px → mostrar
-  header.style.top = "0";
-} else if (currentScroll - lastScrollTop > 30) {
-  // scroll abajo más de 30px → ocultar
-  header.style.top = "-80px";
-}
+      header.style.top = "0";
+    } else if (currentScroll - lastScrollTop > 30) {
+      header.style.top = "-80px";
+    }
     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
   });
 }
+
 </script>
 
 <script>
@@ -958,6 +962,7 @@ navLinksInicio.forEach(navLinkInicio => {
 
 </body>
 </html>
+
 
 
 
