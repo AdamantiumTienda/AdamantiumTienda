@@ -967,6 +967,39 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+<script>
+  // Cerrar el panel si vuelvo a desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 1024) {
+      document.querySelector('.nav-menu')?.classList.remove('active');
+      document.querySelector('.hamburger-menu')?.classList.remove('active');
+    }
+  });
+
+  // Si el menú está abierto, no ocultar el header por scroll
+  (function(){
+    let lastScrollTop = 0;
+    const header = document.querySelector("header");
+    if (!header) return;
+
+    if (window.innerWidth <= 1024) {
+      window.addEventListener("scroll", function() {
+        const navMenu = document.querySelector('.nav-menu');
+        if (navMenu && navMenu.classList.contains('active')) return;
+
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+        if (lastScrollTop - currentScroll > 30) {
+          header.style.top = "0";
+        } else if (currentScroll - lastScrollTop > 30) {
+          header.style.top = "-80px";
+        }
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+      });
+    }
+  })();
+</script>
+
 </script>
 
 </script>
@@ -976,6 +1009,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+
 
 
 
