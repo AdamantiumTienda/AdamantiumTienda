@@ -479,44 +479,7 @@ comprarBtn.onclick = () => {
 <div style="border: 6px solid #f3f3f3; border-top: 6px solid #5c4033; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite;"></div>
 </div>
  
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const dots = document.querySelectorAll(".carousel-dots .dot");
-  const images = document.querySelectorAll(".carousel-image");
 
-  dots.forEach(dot => {
-    dot.addEventListener("click", () => {
-      const index = parseInt(dot.dataset.index);
-      images.forEach((img, i) => {
-        img.classList.toggle("active", i === index);
-      });
-      dots.forEach(d => d.classList.remove("active"));
-      dot.classList.add("active");
-    });
-  });
-if (window.carouselInterval) {
-  clearInterval(window.carouselInterval);
-}
-window.carouselInterval = setInterval(() => {
-  current = (current + 1) % images.length;
-  images.forEach((img, i) => img.classList.toggle("active", i === current));
-  dots.forEach((dot, i) => dot.classList.toggle("active", i === current));
-}, 5000);
-
-  let current = 0;
-
-if (window.carouselInterval) {
-  clearInterval(window.carouselInterval);
-}
-
-window.carouselInterval = setInterval(() => {
-  current = (current + 1) % images.length;
-  images.forEach((img, i) => img.classList.toggle("active", i === current));
-  dots.forEach((dot, i) => dot.classList.toggle("active", i === current));
-}, 5000);
-
-});
-</script>  
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const homeSections = document.querySelectorAll('.page-section, .resenias, .contacto');
@@ -1005,6 +968,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+
 
 
 
