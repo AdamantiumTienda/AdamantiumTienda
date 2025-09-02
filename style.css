@@ -1448,34 +1448,88 @@ main.container {
 
 }
 
-/* ===== HEADER + HAMBURGER alineado a la DERECHA ===== */
+/* ============================================================
+   FIX MOBILE (<=768px) + NAV UNIFICADO (<=1024px)
+   — Cards consistentes, títulos fluidos, modal cómodo
+   — Header fijo, logo centrado, hamburguesa a la derecha
+   — Menú lateral desde la derecha, sin tapar cuando está cerrado
+   ============================================================ */
+
+/* ======== FIX MOBILE (<=768px) AFINADO ======== */
+@media (max-width: 768px) {
+
+  /* 1) Títulos fluidos (evitan cortes raros) */
+  .section h2,
+  #tienda-section h2 {
+    font-size: clamp(1.4rem, 5.3vw, 1.9rem);
+    line-height: 1.2;
+    letter-spacing: 0.2px;
+    word-break: keep-all;
+  }
+
+  /* 2) Menos padding para ganar ancho útil */
+  .section,
+  .page-section,
+  .escritorios-destacados,
+  #tienda-section {
+    padding: 1.5rem 1rem;
+  }
+
+  /* 3) Grid a 1 columna y cards prolijas */
+  .escritorios-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  .escritorio-card {
+    padding: 1rem;
+    border-radius: 14px;
+  }
+  .escritorio-card img {
+    height: 190px;          /* alto consistente en cards */
+    object-fit: cover;
+    width: 100%;
+    display: block;
+  }
+
+  /* 4) Modal más ancho en móvil */
+  .modal-content {
+    width: 96vw;
+    max-width: 96vw;
+  }
+  .modal-body { gap: 16px; }
+}
+
+/* ===== HEADER + HAMBURGER UNIFICADO (mobile & tablets ≤1024px) ===== */
 @media (max-width: 1024px) {
+  /* Header fijo, con logo centrado */
   header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    position: fixed;                 /* usamos fixed + JS de scroll */
+    top: 0; left: 0; right: 0;
     z-index: 2500;
-    background: #eee7de;
+    background: #eee7de;             /* tu fondo */
     display: flex;
     align-items: center;
-    justify-content: center; /* logo centrado */
-    height: 60px;
+    justify-content: center;         /* centra el logo */
+    height: 60px;                    /* alto estable */
+    padding: 0 .75rem;
   }
 
+  /* El contenedor del logo no necesita padding de reserva */
   .logo-container {
-    z-index: 2001;
+    position: relative;
+    z-index: 2001;                   /* logo clickeable */
+    text-align: center;
   }
 
-  /* Botón hamburguesa a la derecha */
+  /* Botón hamburguesa: a la DERECHA y solo su cajita */
   .hamburger-menu {
     display: flex !important;
-    position: absolute;
-    right: 10px;   /* ahora va a la derecha */
+    position: absolute !important;
+    right: 10px !important;          /* alineado a la derecha */
+    left: auto !important;           /* anula reglas antiguas */
     top: 50%;
     transform: translateY(-50%);
-    width: 32px;
-    height: 32px;
+    width: 32px; height: 32px;
     padding: 6px;
     background: transparent;
     border: 0;
@@ -1485,28 +1539,59 @@ main.container {
   }
   .hamburger-menu .bar {
     height: 3px;
-    background-color: #1a1a1a;
+    background-color: #1a1a1a;       /* buen contraste */
   }
 
+  /* Panel lateral: entra desde la DERECHA */
   .nav-menu {
-    position: fixed;
+    position: fixed !important;
     top: 0;
-    right: -100%; /* que entre desde la derecha */
+    right: -100%;                    /* oculto fuera de pantalla */
+    left: auto !important;           /* anula versiones “left” anteriores */
     width: 75%;
+    max-width: 420px;
     height: 100dvh;
     background: rgba(250,245,240,0.96);
     backdrop-filter: blur(6px);
     transition: right .3s ease-in-out;
     z-index: 2600;
-    pointer-events: none;
+    pointer-events: none;            /* no tapar nada cuando está cerrado */
     padding-top: calc(56px + env(safe-area-inset-top, 0px));
   }
   .nav-menu.active {
-    right: 0;
+    right: 0;                        /* entra */
     pointer-events: auto;
   }
 
+  /* Animación a “X” */
   .hamburger-menu.active .bar:nth-child(1){ transform: rotate(45deg) translate(5px,5px); }
   .hamburger-menu.active .bar:nth-child(2){ opacity: 0; }
   .hamburger-menu.active .bar:nth-child(3){ transform: rotate(-45deg) translate(5px,-5px); }
+
+  /* Compensación al navegar por anclas (que no quede tapado por el header) */
+  .page-section,
+  #tienda-section {
+    scroll-margin-top: 72px;         /* más limpio que padding/margin negativos */
+  }
 }
+
+/* (Opcional) Si tenés carrusel en el modal: asegurar marco estable */
+.modal-image-carousel .carousel-images {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;                /* alto fijo sin “saltos” */
+  border-radius: 8px;
+  overflow: hidden;
+  background: #e9e1d6;
+  border: 1px solid #ccc;
+}
+.modal-image-carousel .carousel-image {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;               /* sin recortar imagen */
+  opacity: 0; transition: opacity .25s ease-in-out;
+  display: block;
+}
+.modal-image-carousel .carousel-image.active { opacity: 1; }
+
+
