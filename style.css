@@ -1587,3 +1587,68 @@ main.container {
   .hamburger-menu.active .bar:nth-child(2){ opacity: 0; }
   .hamburger-menu.active .bar:nth-child(3){ transform: rotate(-45deg) translate(5px,-5px); }
 }
+
+/* ===== HEADER + HAMBURGER unificado (mobile & tablet) ===== */
+@media (max-width: 1024px) {
+  header {
+    position: fixed;     /* trabajamos con fixed + JS de scroll */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2500;
+    background: #eee7de;
+  }
+
+  /* espacio a la izquierda para el botón */
+  .logo-container {
+    position: relative;
+    padding-left: 48px;
+    z-index: 2001;
+  }
+
+  /* botón sólo en su cajita, a la IZQUIERDA */
+  .hamburger-menu {
+    display: flex !important;
+    position: absolute !important;
+    left: 10px !important;
+    right: auto !important;   /* anula reglas viejas */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    padding: 6px;
+    background: transparent;
+    border: 0;
+    border-radius: 6px;
+    z-index: 3000;
+    box-shadow: none;
+  }
+  .hamburger-menu .bar {
+    height: 3px;
+    background-color: #1a1a1a;
+  }
+
+  /* panel lateral: no intercepta clicks si está cerrado */
+  .nav-menu {
+    position: fixed !important;
+    top: 0;
+    left: -100%;
+    width: 85%;
+    height: 100dvh;
+    background: rgba(250,245,240,0.96);
+    backdrop-filter: blur(6px);
+    transition: left .3s ease-in-out;
+    z-index: 2600;
+    pointer-events: none;
+    padding-top: calc(56px + env(safe-area-inset-top, 0px));
+  }
+  .nav-menu.active {
+    left: 0;
+    pointer-events: auto;
+  }
+
+  /* animación a “X” */
+  .hamburger-menu.active .bar:nth-child(1){ transform: rotate(45deg) translate(5px,5px); }
+  .hamburger-menu.active .bar:nth-child(2){ opacity: 0; }
+  .hamburger-menu.active .bar:nth-child(3){ transform: rotate(-45deg) translate(5px,-5px); }
+}
