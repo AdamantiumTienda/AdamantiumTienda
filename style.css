@@ -1525,75 +1525,37 @@ main.container {
   .modal-body { gap: 16px; }
 }
 
-/* ===== FIX HAMBURGER EN MOVIL (iPhone 12 mini y similares) ===== */
-@media (max-width: 768px) {
-  /* Botón siempre visible arriba a la derecha, por encima de todo */
-  .hamburger-menu {
-    display: flex !important;
-    position: fixed;                /* fijo, no dentro del flujo del header */
-    top: calc(env(safe-area-inset-top, 0px) + 10px);
-    right: 12px;
-    z-index: 4000;                  /* más alto que nav, modal, etc. */
-    width: 36px;
-    height: 36px;
-    padding: 6px;
-    background: rgba(255,255,255,0.85);
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,.12);
-  }
-  .hamburger-menu .bar {
-    background-color: #1a1a1a;      /* contraste en fondos claros */
-    height: 3px;
-  }
-
-  /* Menú lateral oculto fuera de pantalla hasta que esté .active */
-  .nav-menu {
-    position: fixed;
+/* ===== HEADER + HAMBURGER UNIFICADO (mobile & tablets) ===== */
+@media (max-width: 1024px) {
+  header {
+    position: sticky;
     top: 0;
-    left: -100%;
-    width: 85%;
-    height: 100vh;
-    background: rgba(250,245,240,0.96);
-    backdrop-filter: blur(6px);
-    transition: left .3s ease-in-out;
-    z-index: 3000;                  /* debajo del botón */
+    z-index: 2500;
+    background: #f3ebe2; /* mismo fondo que ya usás */
   }
-  .nav-menu.active { left: 0; }
 
-  /* Evitar que el header “empuje” al botón o lo tape */
-  header { z-index: 2500; }
-}
-
-/* Estado de la X del botón sin moverlo */
-.hamburger-menu.active .bar:nth-child(1){ transform: rotate(45deg) translate(5px,5px); }
-.hamburger-menu.active .bar:nth-child(2){ opacity: 0; }
-.hamburger-menu.active .bar:nth-child(3){ transform: rotate(-45deg) translate(5px,-5px); }
-
-
-
-/* ===== HAMBURGER COMPACTO A LA IZQUIERDA (MOBILE) ===== */
-@media (max-width: 768px) {
-  /* Reservamos lugar para el botón a la izquierda del logo */
+  /* Reservamos espacio para el botón a la izquierda del logo */
   .logo-container {
     position: relative;
-    padding-left: 48px; /* espacio para el botón */
-    z-index: 2000;      /* que el logo quede clickeable */
+    padding-left: 48px;
+    z-index: 2001; /* el logo queda clickeable */
   }
 
-  /* El botón: solo ocupa su cajita, NO todo el header */
+  /* ÚNICA versión del botón: a la IZQUIERDA, dentro del header */
   .hamburger-menu {
     display: flex !important;
-    position: absolute;        /* dentro del header, junto al logo */
-    left: 10px;
+    position: absolute !important;
+    left: 10px !important;
+    right: auto !important;     /* <-- anula reglas antiguas */
     top: 50%;
     transform: translateY(-50%);
     width: 32px;
     height: 32px;
     padding: 6px;
-    background: transparent;   /* sin fondo grande que tape */
+    background: transparent;    /* que no tape toda la barra */
     border: 0;
     border-radius: 6px;
-    z-index: 3000;             /* por encima del logo pero solo en su cajita */
+    z-index: 3000;
     box-shadow: none;
   }
   .hamburger-menu .bar {
@@ -1601,23 +1563,23 @@ main.container {
     background-color: #1a1a1a;
   }
 
-  /* El panel lateral NO intercepta clicks cuando está cerrado */
+  /* Panel lateral: no intercepta clics cuando está cerrado */
   .nav-menu {
-    position: fixed;
+    position: fixed !important;
     top: 0;
     left: -100%;
     width: 85%;
-    height: 100vh;
+    height: 100dvh;
     background: rgba(250,245,240,0.96);
     backdrop-filter: blur(6px);
     transition: left .3s ease-in-out;
-    z-index: 2500;
-    pointer-events: none;     /* <- clave: no tapar el header cuando está oculto */
+    z-index: 2600;
+    pointer-events: none;       /* clave para que el header se pueda tocar */
   }
   .nav-menu.active {
     left: 0;
-    pointer-events: auto;     /* ahora sí recibe clicks */
-    padding-top: calc(56px + env(safe-area-inset-top, 0px)); /* que no quede debajo del header */
+    pointer-events: auto;
+    padding-top: calc(56px + env(safe-area-inset-top, 0px));
   }
 
   /* Animación a “X” */
@@ -1625,5 +1587,3 @@ main.container {
   .hamburger-menu.active .bar:nth-child(2){ opacity: 0; }
   .hamburger-menu.active .bar:nth-child(3){ transform: rotate(-45deg) translate(5px,-5px); }
 }
-
-
