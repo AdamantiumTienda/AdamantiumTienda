@@ -1571,4 +1571,59 @@ main.container {
 
 
 
+/* ===== HAMBURGER COMPACTO A LA IZQUIERDA (MOBILE) ===== */
+@media (max-width: 768px) {
+  /* Reservamos lugar para el botón a la izquierda del logo */
+  .logo-container {
+    position: relative;
+    padding-left: 48px; /* espacio para el botón */
+    z-index: 2000;      /* que el logo quede clickeable */
+  }
+
+  /* El botón: solo ocupa su cajita, NO todo el header */
+  .hamburger-menu {
+    display: flex !important;
+    position: absolute;        /* dentro del header, junto al logo */
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    padding: 6px;
+    background: transparent;   /* sin fondo grande que tape */
+    border: 0;
+    border-radius: 6px;
+    z-index: 3000;             /* por encima del logo pero solo en su cajita */
+    box-shadow: none;
+  }
+  .hamburger-menu .bar {
+    height: 3px;
+    background-color: #1a1a1a;
+  }
+
+  /* El panel lateral NO intercepta clicks cuando está cerrado */
+  .nav-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 85%;
+    height: 100vh;
+    background: rgba(250,245,240,0.96);
+    backdrop-filter: blur(6px);
+    transition: left .3s ease-in-out;
+    z-index: 2500;
+    pointer-events: none;     /* <- clave: no tapar el header cuando está oculto */
+  }
+  .nav-menu.active {
+    left: 0;
+    pointer-events: auto;     /* ahora sí recibe clicks */
+    padding-top: calc(56px + env(safe-area-inset-top, 0px)); /* que no quede debajo del header */
+  }
+
+  /* Animación a “X” */
+  .hamburger-menu.active .bar:nth-child(1){ transform: rotate(45deg) translate(5px,5px); }
+  .hamburger-menu.active .bar:nth-child(2){ opacity: 0; }
+  .hamburger-menu.active .bar:nth-child(3){ transform: rotate(-45deg) translate(5px,-5px); }
+}
+
 
