@@ -890,18 +890,16 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 <script>
+<script>
 let lastScrollTop = 0;
 const header = document.querySelector("header");
 
 if (window.innerWidth < 769) {
   window.addEventListener("scroll", function() {
     const navMenu = document.querySelector('.nav-menu');
-
-    // Si el menú hamburguesa está abierto, no ocultar el header ni el botón
-    if (navMenu && navMenu.classList.contains('active')) return;
+    if (navMenu && navMenu.classList.contains('active')) return; // no ocultar si está abierto
 
     const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
     if (lastScrollTop - currentScroll > 30) {
       header.style.top = "0";
     } else if (currentScroll - lastScrollTop > 30) {
@@ -910,8 +908,8 @@ if (window.innerWidth < 769) {
     lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
   });
 }
-
 </script>
+
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -955,6 +953,22 @@ navLinksInicio.forEach(navLinkInicio => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 });
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const navMenu = document.querySelector('.nav-menu');
+  const hamburger = document.querySelector('.hamburger-menu');
+  const logoLink = document.querySelector('.logo-nombre a');
+
+  if (logoLink) {
+    logoLink.addEventListener('click', () => {
+      navMenu.classList.remove('active');
+      hamburger.classList.remove('active');
+    });
+  }
+});
+</script>
+
 </script>
 </body>
 </html>
@@ -962,6 +976,7 @@ navLinksInicio.forEach(navLinkInicio => {
 
 </body>
 </html>
+
 
 
 
