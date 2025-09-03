@@ -198,70 +198,82 @@
 
 </main>
 
-<div class="modal" id="productModal" style="display: none;">
-  <div class="modal-content"> <!-- ← sin style inline -->
-    <span class="close-button">×</span>
+<!-- MODAL NUEVO -->
+<div class="modal" id="productModal" style="display:none;">
+  <div class="modal-content">
+    <button class="close-button" aria-label="Cerrar">×</button>
+
     <div class="modal-body">
-      <div class="modal-image-carousel" id="carouselContainer"></div>
+      <!-- Columna: Imagen / Carrusel -->
+      <div class="modal-image">
+        <div class="carousel-images" id="carouselContainer">
+          <!-- Las imágenes se inyectan por JS -->
+        </div>
+        <div class="carousel-dots" id="carouselDots"></div>
+      </div>
+
+      <!-- Columna: Detalles -->
       <div class="modal-details" id="modalDetails">
-<h3 id="modalProductName">Nombre del Producto</h3>
-<p><strong>Medidas:</strong> <span id="modalMedidas"></span></p>
-<p><strong>Materiales:</strong> <span id="modalMateriales"></span></p>
-<p><strong>Descripción:</strong> <span id="modalDescripcionLarga"></span></p>
-<p>
-  <small>
-    <strong>Para otra variedad de maderas duras:</strong>
-    Consultas con Sabri 👉 <a href="https://wa.me/541122878806" target="_blank">1122878806</a>
-  </small>
-</p>
+        <h3 id="modalProductName">Nombre del Producto</h3>
 
+        <p><strong>Medidas:</strong> <span id="modalMedidas"></span></p>
+        <p><strong>Materiales:</strong> <span id="modalMateriales"></span></p>
+        <p><strong>Descripción:</strong> <span id="modalDescripcionLarga"></span></p>
 
-<div class="product-options">
-<div class="option">
-<label for="modalSize">Tamaño:</label>
-<select id="modalSize" name="size">
-<option value="130x60">130 × 60 cm</option>
-<option value="150x60">150 × 60 cm</option>
-<option value="160x60">160 × 60 cm</option>
-<option value="170x60">170 × 60 cm</option>
-<option value="180x60">180 × 60 cm</option>
-</select>
-</div>
-<div class="option">
-<label for="modalColor">Color:</label>
-<select id="modalColor" name="color" required>
-  <option value="">Seleccione un color</option>
-  <option value="petrifi">Petrifí</option>
-  <option value="roble-claro">Roble Claro</option>
-  <option value="roble-oscuro">Roble Oscuro</option>
-  <option value="cedro">Cedro</option>
-  <option value="caoba">Caoba</option>
-  <option value="nogal">Nogal</option>
-  <option value="viraro">Viraró</option>
-  <option value="wengue">Wengué</option>
-  <option value="algarrobo">Algarrobo</option>
-</select>
+        <p>
+          <small>
+            <strong>Para otra variedad de maderas duras:</strong>
+            Consultas con Sabri 👉
+            <a href="https://wa.me/541122878806" target="_blank" rel="noopener">1122878806</a>
+          </small>
+        </p>
 
+        <div class="product-options">
+          <div class="option">
+            <label for="modalSize">Tamaño:</label>
+            <select id="modalSize" name="size">
+              <option value="130x60">130 × 60 cm</option>
+              <option value="150x60">150 × 60 cm</option>
+              <option value="160x60">160 × 60 cm</option>
+              <option value="170x60">170 × 60 cm</option>
+              <option value="180x60">180 × 60 cm</option>
+            </select>
+          </div>
 
-</div>
-</div>
+          <div class="option">
+            <label for="modalColor">Color:</label>
+            <select id="modalColor" name="color" required>
+              <option value="">Seleccione un color</option>
+              <option value="petrifi">Petrifí</option>
+              <option value="roble-claro">Roble Claro</option>
+              <option value="roble-oscuro">Roble Oscuro</option>
+              <option value="cedro">Cedro</option>
+              <option value="caoba">Caoba</option>
+              <option value="nogal">Nogal</option>
+              <option value="viraro">Viraró</option>
+              <option value="wengue">Wengué</option>
+              <option value="algarrobo">Algarrobo</option>
+            </select>
+          </div>
+        </div>
 
-<div class="precio-wrapper">
-<div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
-<p class="precio" id="modalPrecio" style="margin: 0;"></p>
-<span class="envio-info">
+        <div class="precio-wrapper">
+          <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+            <p class="precio" id="modalPrecio" style="margin:0;"></p>
+            <span class="envio-info">
               * Envío a cargo del comprador. Costo variable según zona.<br/>
               Entregas tercerizadas a todo el país. <br/>
-                    
-                  Tiempo de entrega: 20 días.*  
+              Tiempo de entrega: 20 días.*
             </span>
+          </div>
+        </div>
+
+        <button class="btn-cta">Comprar</button>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-<button class="btn-cta">Comprar</button>
-</div>
-</div>
-</div>
-</div>
+
 
 <footer>
 <p>© 2025 Adamantium. Todos los derechos reservados.</p>
@@ -952,6 +964,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+
 
 
 
