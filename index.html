@@ -1068,6 +1068,101 @@ window.addEventListener('keydown', e=>{
 /* ====== botón TIENDA ya lo tenés, no lo tocamos ====== */
 </script>
 
+
+  <script>
+(function () {
+  // Utilidad para crear SVG flechas
+  const arrow = d => (
+    d === 'L'
+      ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>'
+      : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.59 16.59 10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>'
+  );
+
+  // Construye el carrusel cada vez que abrís un producto
+  window.buildCarousel = function buildCarousel(imgs = []) {
+    const wrap = document.getElementById('carouselContainer');
+    if (!wrap) return;
+
+    // HTML
+    wrap.innerHTML = `
+      <div class="carousel-images" tabindex="0">
+        ${imgs.map((src,i)=>`
+          <img class="carousel-image${i===0?' active':''}" src="${src}"
+               alt="" loading="lazy" decoding="async"
+               sizes="(max-width: 768px) 92vw, 520px">
+        `).join('')}
+        <div class="carousel-nav">
+          <button class="carousel-btn prev" aria-label="Anterior">${arrow('L')}</button>
+          <button class="carousel-btn next" aria-label="Siguiente">${arrow('R')}</button>
+        </div>
+      </div>
+      <div class="carousel-dots" role="tablist" aria-label="Imágenes">
+        ${imgs.map((_,i)=>`<button class="dot${i===0?' active':''}" role="tab" aria-selected="${i===0?'true':'false'}" data-idx="${i}"></button>`).join('')}
+      </div>
+    `;
+
+    const images = [...wrap.querySelectorAll('.carousel-image')];
+    const dots   = [...wrap.querySelectorAll('.dot')];
+    const prev   = wrap.querySelector('.prev');
+    const next   = wrap.querySelector('.next');
+    const panel  = wrap.querySelector('.carousel-images');
+
+    let cur = 0, auto = null;
+
+    const go = (idx) => {
+      cur = (idx + images.length) % images.length;
+      images.forEach((img,i)=>img.classList.toggle('active', i===cur));
+      dots.forEach((d,i)=>{
+        d.classList.toggle('active', i===cur);
+        d.setAttribute('aria-selected', i===cur ? 'true' : 'false');
+      });
+    };
+
+    // Dots
+    dots.forEach(d => d.addEventListener('click', () => go(+d.dataset.idx)));
+
+    // Flechas
+    prev && prev.addEventListener('click', ()=> go(cur-1));
+    next && next.addEventListener('click', ()=> go(cur+1));
+
+    // Teclado (izq/der + escape cierra modal)
+    panel.addEventListener('keydown', (e)=>{
+      if (e.key === 'ArrowLeft')  go(cur-1);
+      if (e.key === 'ArrowRight') go(cur+1);
+    });
+
+    // Swipe táctil
+    let x0 = null;
+    panel.addEventListener('touchstart', e=> x0 = e.touches[0].clientX, {passive:true});
+    panel.addEventListener('touchend', e=>{
+      if (x0==null) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      if (Math.abs(dx) > 40) go(cur + (dx < 0 ? 1 : -1));
+      x0 = null;
+    }, {passive:true});
+
+    // Autoplay suave (podés comentar estas 4 líneas si no lo querés)
+    clearInterval(window.__autoCarousel__);
+    window.__autoCarousel__ = setInterval(()=> go(cur+1), 3500);
+
+    // Focus accesible
+    setTimeout(()=> panel.focus(), 0);
+  };
+
+  // Hook: cuando abrís el modal con openModal(id), armamos el carrusel
+  const _openModal = window.openModal;
+  window.openModal = function(id) {
+    if (typeof _openModal === 'function') _openModal(id);
+    // productosData debe existir (ya lo tenés definido)
+    const data = (window.productosData || {})[id];
+    if (data && Array.isArray(data.imagenes)) {
+      buildCarousel(data.imagenes);
+    }
+  };
+
+})();
+</script>
+
 </script>
 </body>
 </html>
@@ -1075,6 +1170,7 @@ window.addEventListener('keydown', e=>{
 
 </body>
 </html>
+
 
 
 
