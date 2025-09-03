@@ -1429,6 +1429,30 @@ main.container {
   }
 }
 
+/* Centrado del carrusel + cursor de zoom */
+.modal-image-carousel { align-self: center; }
+.carousel-images { margin-inline: auto; cursor: zoom-in; }
+
+/* La imagen SIEMPRE centrada dentro del contenedor */
+.carousel-image { object-position: center center; }
+
+/* Fullscreen: que se vea perfecta y a fondo negro */
+:fullscreen { background: #000; }
+:fullscreen .carousel-image {
+  width: 100vw;
+  height: 100vh;
+  object-fit: contain;
+  background: #000;
+}
+
+/* Fallback overlay (por si el Fullscreen API no está disponible en iOS) */
+.zoom-overlay{
+  position: fixed; inset: 0; background: #000;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 5000;
+}
+.zoom-overlay img{ max-width: 100%; max-height: 100%; }
+
 
 
 
