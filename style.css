@@ -1453,6 +1453,67 @@ main.container {
 }
 .zoom-overlay img{ max-width: 100%; max-height: 100%; }
 
+/* ===== MODAL: layout estable en desktop y móvil ===== */
+
+/* Contenedor un poco más ancho para respirar */
+.modal-content{
+  max-width: 1000px;
+}
+
+/* Grid: imagen a la izq, texto a la der */
+.modal-body{
+  display: grid;
+  grid-template-columns: min(46vw, 520px) 1fr;
+  align-items: start;
+  gap: 24px;
+}
+
+/* La columna de la imagen ocupa el ancho del grid sin crecer más */
+.modal-image-carousel{
+  width: 100%;
+  max-width: none;
+  margin: 0 auto;
+}
+
+/* Imagen siempre centrada, con alto controlado por viewport */
+.carousel-images{
+  aspect-ratio: 16 / 10;      /* más “alta” que 16/9 para lucir la foto */
+  max-height: 56vh;           /* nunca más de 56% de la altura de pantalla */
+  margin-inline: auto;
+  border-radius: 10px;
+}
+.carousel-image{ object-position: center center; }
+
+/* Dots más contenidos */
+.carousel-dots{ gap: 8px; margin-top: 10px; }
+.carousel-dots .dot{ width: 9px; height: 9px; }
+
+/* ===== Tablet y abajo ===== */
+@media (max-width: 1024px){
+  .modal-body{
+    grid-template-columns: 1fr;      /* apilado */
+    gap: 18px;
+  }
+  .carousel-images{
+    aspect-ratio: 4 / 3;
+    max-height: 42vh;                /* menos alto en pantallas bajas */
+  }
+  .modal-details{ width: 100%; }
+}
+
+/* ===== Phones chicos ===== */
+@media (max-width: 480px){
+  .carousel-images{
+    aspect-ratio: 1 / 1;             /* cuadrado agradable en phones */
+    max-height: 360px;
+  }
+  .carousel-dots .dot{ width: 8px; height: 8px; }
+}
+
+/* Mejoras menores de lectura en el modal */
+.modal-details p{ line-height: 1.65; }
+
+
 
 
 
