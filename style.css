@@ -1333,6 +1333,36 @@ main.container {
   .nav-menu.active{ right: 0 !important; }
 }
 
+/* Fondo ambiente borroso detrás de la imagen activa del modal */
+.carousel-images.ambient {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.carousel-images.ambient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--lb-bg, none); /* se setea por JS */
+  background-size: cover;
+  background-position: center;
+  filter: blur(26px) saturate(1.05) brightness(0.98);
+  transform: scale(1.15);
+  opacity: 0.45;        /* intensidad del fondo */
+  z-index: 0;
+}
+
+/* La foto real arriba del fondo */
+.carousel-images.ambient .carousel-image {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: contain;         /* no recortes */
+  opacity: 0; transition: opacity .25s ease;
+  z-index: 1;                  /* por encima del fondo */
+}
+.carousel-images.ambient .carousel-image.active { opacity: 1; }
+
 
 
 
