@@ -400,6 +400,33 @@ if (carouselContainer && product.imagenes) {
   const images = carouselContainer.querySelectorAll(".carousel-image");
   const imgWrap = carouselContainer.querySelector(".carousel-images");
 
+  // ——— Pantalla completa al tocar ———
+const openOverlay = (src) => {
+  const overlay = document.createElement('div');
+  overlay.className = 'zoom-overlay';
+  overlay.innerHTML = `<img src="${src}" alt="">`;
+  overlay.addEventListener('click', () => overlay.remove());
+  document.body.appendChild(overlay);
+};
+
+const toggleFullscreen = async (el) => {
+  try {
+    if (!document.fullscreenElement && el.requestFullscreen) {
+      await el.requestFullscreen();
+    } else if (document.exitFullscreen) {
+      await document.exitFullscreen();
+    }
+  } catch {
+    openOverlay(el.getAttribute('src')); // fallback iOS
+  }
+};
+
+// click en cada imagen → fullscreen (o overlay)
+images.forEach(img => {
+  img.addEventListener('click', () => toggleFullscreen(img));
+});
+
+
   // === Ambiente borroso ===
   const setAmbientBG = (src) => {
     imgWrap.style.setProperty("--lb-bg", `url("${src}")`);
@@ -925,6 +952,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+
 
 
 
