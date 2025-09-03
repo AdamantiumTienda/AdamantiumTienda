@@ -1513,6 +1513,79 @@ main.container {
 /* Mejoras menores de lectura en el modal */
 .modal-details p{ line-height: 1.65; }
 
+/* ===== MODAL RESPONSIVO – sin scroll horizontal ===== */
+
+/* Contenedor general */
+.modal-content{
+  box-sizing: border-box;
+  width: 96vw;
+  max-width: 1000px;
+  max-height: 90vh;
+  overflow-y: auto;
+  overflow-x: hidden;        /* ← fuera scroll horizontal */
+}
+
+/* Layout en desktop: imagen izq, texto der */
+.modal-body{
+  display: grid;
+  grid-template-columns: minmax(280px, 46%) 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+/* Quitar anchos fijos heredados */
+.modal-image-carousel{
+  flex: 0 0 auto;            /* anula el 420px fijo */
+  max-width: none;
+  width: 100%;
+  margin: 0;
+}
+
+/* Marco de la imagen: alto estable y centrado */
+.carousel-images{
+  width: 100%;
+  aspect-ratio: 16 / 10;     /* un poco más alto que 16/9 */
+  max-height: 58vh;          /* nunca invade el texto */
+  margin-inline: auto;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.carousel-image{
+  object-fit: contain;
+  object-position: center center;
+}
+
+/* El texto no fuerza ancho mínimo */
+.modal-details{
+  min-width: 0;              /* ← IMPORTANTÍSIMO: evita overflow por min-width */
+  max-width: none;
+}
+
+/* Dots más discretos */
+.carousel-dots{ gap: 8px; margin-top: 10px; }
+.carousel-dots .dot{ width: 9px; height: 9px; }
+
+/* ===== Tablet y móvil: apilar, proporción + cuadrada ===== */
+@media (max-width: 1024px){
+  .modal-body{
+    grid-template-columns: 1fr;   /* apilado */
+    gap: 16px;
+  }
+  .carousel-images{
+    aspect-ratio: 4 / 3;
+    max-height: 46vh;
+  }
+}
+
+@media (max-width: 480px){
+  .carousel-images{
+    aspect-ratio: 1 / 1;          /* se ve grande y limpio en phones */
+    max-height: 360px;
+  }
+  .carousel-dots .dot{ width: 8px; height: 8px; }
+}
+
 
 
 
