@@ -957,6 +957,129 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </script>
 
+
+<script>
+/* ====== builder del visor de imágenes + lightbox ====== */
+function buildGallery(container, images){
+  container.innerHTML = `
+    <div class="gallery">
+      <div class="gallery-viewport">
+        ${images.map((src,i)=>`<img src="${src}" alt="" class="${i===0?'active':''}" data-index="${i}">`).join('')}
+        <button class="gallery-arrow prev" aria-label="Anterior">‹</button>
+        <button class="gallery-arrow next" aria-label="Siguiente">›</button>
+      </div>
+      <div class="gallery-thumbs">
+        ${images.map((src,i)=>`
+          <button class="gallery-thumb ${i===0?'active':''}" data-index="${i}">
+            <img src="${src}" alt="">
+          </button>`).join('')}
+      </div>
+    </div>
+
+    <!-- lightbox interno del modal -->
+    <div class="lightbox" role="dialog" aria-modal="true">
+      <div class="lightbox-inner">
+        <img src="${images[0]}" alt="">
+        <button class="lightbox-close" aria-label="Cerrar">✕</button>
+      </div>
+    </div>
+  `;
+
+  const view = container.querySelector('.gallery-viewport');
+  const imgs = [...view.querySelectorAll('img')];
+  const prev = view.querySelector('.gallery-arrow.prev');
+  const next = view.querySelector('.gallery-arrow.next');
+  const thumbs = [...container.querySelectorAll('.gallery-thumb')];
+  const lightbox = container.querySelector('.lightbox');
+  const lightImg = lightbox.querySelector('img');
+  const lightClose = lightbox.querySelector('.lightbox-close');
+
+  let current = 0;
+
+  function show(i){
+    current = (i + imgs.length) % imgs.length;
+    imgs.forEach((im,idx)=>im.classList.toggle('active', idx===current));
+    thumbs.forEach((t,idx)=>t.classList.toggle('active', idx===current));
+  }
+
+  prev.addEventListener('click',()=>show(current-1));
+  next.addEventListener('click',()=>show(current+1));
+  thumbs.forEach(t=>t.addEventListener('click',()=>show(parseInt(t.dataset.index,10))));
+
+  // abrir lightbox tocando la imagen
+  view.addEventListener('click',()=>{
+    lightImg.src = imgs[current].src;
+    lightbox.classList.add('open');
+  });
+  lightClose.addEventListener('click',()=> lightbox.classList.remove('open'));
+  lightbox.addEventListener('click',e=>{
+    if(e.target === lightbox) lightbox.classList.remove('open');
+  });
+
+  // swipe en móvil
+  let x0=null;
+  view.addEventListener('touchstart',e=>{ x0 = e.touches[0].clientX; },{passive:true});
+  view.addEventListener('touchend',e=>{
+    if(x0==null) return;
+    const dx = e.changedTouches[0].clientX - x0;
+    if(Math.abs(dx)>40) (dx>0? prev: next).click();
+    x0=null;
+  });
+
+  // autoplay suave (opcional, cortar en interacción)
+  let auto = setInterval(()=> next.click(), 3500);
+  [prev,next,...thumbs,view].forEach(el=>el.addEventListener('pointerdown',()=>{ clearInterval(auto); auto=null; },{once:true}));
+
+  // API para sincronizar con modal externo si hiciera falta
+  return { show };
+}
+
+/* ====== openModal: setea textos y lanza el visor ====== */
+const modal = document.getElementById('productModal');
+const closeBtn = modal.querySelector('.close-button');
+const body = document.body;
+
+function openModal(id){
+  const data = productosData[id];
+  if(!data) return;
+
+  // textos
+  document.getElementById('modalProductName').textContent = data.nombre;
+  document.getElementById('modalMedidas').textContent = data.medidas;
+  document.getElementById('modalMateriales').textContent = data.materiales;
+  document.getElementById('modalDescripcionLarga').textContent = data.descripcionLarga;
+  document.getElementById('modalPrecio').textContent = data.precio || '';
+
+  // imágenes
+  const container = document.getElementById('carouselContainer');
+  const api = buildGallery(container, data.imagenes || []);
+
+  // abrir
+  modal.classList.add('show');
+  modal.style.display = 'flex';
+  body.classList.add('no-scroll');
+
+  // accesibilidad: foco y close
+  setTimeout(()=> closeBtn.focus(), 30);
+}
+
+function closeModal(){
+  modal.classList.remove('show');
+  modal.style.display = 'none';
+  body.classList.remove('no-scroll');
+}
+
+closeBtn.addEventListener('click', closeModal);
+modal.addEventListener('click', e=>{
+  if(e.target === modal) closeModal();
+});
+window.addEventListener('keydown', e=>{
+  if(e.key === 'Escape' && modal.classList.contains('show')) closeModal();
+});
+
+/* ====== botón TIENDA ya lo tenés, no lo tocamos ====== */
+</script>
+
 </script>
 </body>
 </html>
@@ -964,6 +1087,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+
 
 
 
