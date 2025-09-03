@@ -1586,6 +1586,99 @@ main.container {
   .carousel-dots .dot{ width: 8px; height: 8px; }
 }
 
+/* ==== MODAL NUEVO – RESPONSIVO Y SIN OVERFLOW ==== */
+.modal{
+  position: fixed; inset:0; display:flex; align-items:center; justify-content:center;
+  background: rgba(0,0,0,.75); z-index: 2000;
+  opacity:0; visibility:hidden; transition: opacity .25s ease, visibility 0s linear .25s;
+}
+.modal.show{ opacity:1; visibility:visible; transition-delay:0s; }
+
+.modal-content{
+  width: min(95vw, 1000px);
+  max-height: 90vh;
+  background:#f3efe7;
+  color:#1a1a1a;
+  border-radius: 12px;
+  padding: 22px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.6);
+  overflow: hidden;               /* ← el contenedor no scrollea lateral */
+  position: relative;
+}
+
+.close-button{
+  position:absolute; top:12px; right:14px;
+  font-size:28px; line-height:1; border:0; background:transparent; color:#5c4033;
+  cursor:pointer;
+}
+
+/* GRID: Imagen a la izquierda, texto a la derecha */
+.modal-body{
+  display:grid;
+  grid-template-columns: minmax(0, 46%) minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+}
+
+/* ===== COLUMNA IMAGEN / CAROUSEL ===== */
+.modal-image{ min-width:0; }
+.carousel-images{
+  width:100%;
+  aspect-ratio: 16/10;            /* desktop */
+  max-height: 56vh;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-inline:auto;
+  background:#e9e1d6;
+  display:flex; align-items:center; justify-content:center;
+}
+.carousel-images img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;             /* nada de recortes feos */
+  object-position: center center;
+}
+.carousel-dots{
+  display:flex; gap:8px; justify-content:center; margin-top:10px;
+}
+.carousel-dots .dot{
+  width:9px; height:9px; border-radius:50%; background:#c5bdb4; opacity:.9; cursor:pointer;
+}
+.carousel-dots .dot.active{ background:#5c4033; }
+
+/* ===== COLUMNA TEXTO ===== */
+.modal-details{
+  min-width: 0;                   /* ← EVITA overflow por min-width */
+  max-height: calc(90vh - 44px);  /* espacio útil dentro del content */
+  overflow: auto;                 /* si el texto es muy largo, scrollea solo esta columna */
+}
+.modal-details h3{ font-size:1.6rem; margin: .2rem 0 1rem; }
+.modal-details p{ margin-bottom:.8rem; line-height:1.65; color:#5c4033; }
+.modal-details .precio{ font-size:1.45rem; color:#1a1a1a; font-weight:700; margin:.8rem 0 1.2rem; }
+
+/* ===== BREAKPOINTS ===== */
+@media (max-width: 1024px){
+  .modal-body{
+    grid-template-columns: 1fr;         /* apilado */
+  }
+  .carousel-images{
+    aspect-ratio: 4/3;
+    max-height: 46vh;
+  }
+}
+
+@media (max-width: 480px){
+  .modal-content{ padding:16px; }
+  .carousel-images{
+    aspect-ratio: 1/1;                  /* cuadrado agradable en phones */
+    max-height: 360px;
+  }
+  .carousel-dots .dot{ width:8px; height:8px; }
+}
+
+/* Seguridad extra contra scroll horizontal en el modal */
+.modal-content *{ min-width:0; }
+
 
 
 
