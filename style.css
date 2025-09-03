@@ -1594,4 +1594,72 @@ main.container {
 }
 .modal-image-carousel .carousel-image.active { opacity: 1; }
 
+/* ==== OVERRIDE iOS / phones & tablets: hamburger SIEMPRE a la DERECHA ==== */
+/* Aplica hasta 1024px e incluye un refuerzo extra para <480px (iPhone comunes) */
+@media (max-width: 1024px) {
+  /* header centrado y estable */
+  header{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    display: flex; align-items: center; justify-content: center;
+    background: #eee7de;
+    z-index: 2500;
+  }
+
+  /* NUNCA reservamos espacio a la izquierda del logo en mobile */
+  .logo-container{
+    padding-left: 0 !important;
+    z-index: 2001;
+  }
+
+  /* Botón: a la DERECHA, dentro del header. Anulamos cualquier regla vieja. */
+  .hamburger-menu{
+    position: absolute !important;
+    right: 10px !important;
+    left: auto !important;
+    top: 50%;
+    transform: translateY(-50%) !important;
+    width: 32px; height: 32px;
+    padding: 6px;
+    background: transparent;
+    border: 0; border-radius: 6px;
+    z-index: 3000;
+    float: none !important;   /* por si quedó algún float heredado */
+  }
+  .hamburger-menu .bar{ height: 3px; background:#1a1a1a; }
+
+  /* Menú lateral: entra desde la DERECHA siempre */
+  .nav-menu{
+    position: fixed !important;
+    top: 0; right: -100% !important;
+    left: auto !important;            /* anulamos variantes por izquierda */
+    width: 75%; max-width: 420px;
+    height: 100dvh;
+    background: rgba(250,245,240,.96);
+    backdrop-filter: blur(6px);
+    transition: right .3s ease-in-out;
+    z-index: 2600;
+    pointer-events: none;
+    padding-top: calc(56px + env(safe-area-inset-top, 0px));
+  }
+  .nav-menu.active{ right: 0 !important; pointer-events: auto; }
+
+  /* Anclas: que no queden debajo del header */
+  .page-section, #tienda-section{ scroll-margin-top: 72px; }
+}
+
+/* Refuerzo específico para anchos "iPhone" (<480px): por si alguna media vieja gana */
+@media (max-width: 480px){
+  .hamburger-menu{
+    right: 10px !important;
+    left: auto !important;
+  }
+  .nav-menu{
+    right: -100% !important;
+    left: auto !important;
+  }
+  .nav-menu.active{ right: 0 !important; }
+}
+
 
