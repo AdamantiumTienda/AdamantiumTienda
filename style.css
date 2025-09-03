@@ -1363,6 +1363,72 @@ main.container {
 }
 .carousel-images.ambient .carousel-image.active { opacity: 1; }
 
+/* ===== Modal “pro”: imagen grande, sticky en desktop, proporciones cuidadas ===== */
+
+/* Desktop y grandes */
+@media (min-width: 1024px) {
+  .modal-content{
+    max-width: 1100px;      /* +ancho = imagen + cómoda */
+  }
+  .modal-body{
+    gap: 28px;
+    align-items: flex-start; /* evita que todo “baje” con la foto */
+  }
+  .modal-image-carousel{
+    flex: 0 0 520px;        /* columna izquierda ancha */
+    max-width: 520px;
+  }
+  .carousel-images{
+    aspect-ratio: 16 / 10;  /* un toque + alta que 16/9, se luce más */
+    border-radius: 10px;
+  }
+}
+
+/* Sticky solo si hay “alto” suficiente (no molesta en pantallas bajitas) */
+@media (min-width: 1024px) and (min-height: 700px) {
+  .modal-image-carousel{
+    position: sticky;
+    top: 24px;              /* se queda visible mientras leés */
+  }
+}
+
+/* Móvil chico: foto más cuadrada y dots finos */
+@media (max-width: 480px) {
+  .carousel-images{
+    aspect-ratio: 1 / 1;    /* cuadradito agradable en phones */
+    border-radius: 12px;
+  }
+  .carousel-dots .dot{
+    width: 8px; height: 8px;
+  }
+}
+
+/* Detalle estético general del carrusel */
+.carousel-images{
+  background: #e9e1d6;      /* marco suave */
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+}
+.carousel-dots{
+  gap: 8px;
+  margin-top: 12px;
+}
+.carousel-dots .dot{
+  background: #cfc7be;
+  transition: transform .2s ease, background-color .2s ease;
+}
+.carousel-dots .dot.active{
+  background: #5c4033;
+  transform: scale(1.05);
+}
+
+/* Selects/inputs del modal más cómodos en móvil */
+@media (max-width: 768px){
+  .product-options .option select{
+    width: 100%;
+  }
+}
+
 
 
 
