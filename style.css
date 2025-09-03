@@ -1806,6 +1806,135 @@ main.container {
 }
 
 
+/* ===== Modal media / carrusel ===== */
+.modal-media {
+  flex: 1 1 480px;
+  max-width: 560px;
+  /* Mantiene forma agradable sin cortar contenido */
+  aspect-ratio: 16/10;
+  max-height: min(52vh, 520px);
+  background: radial-gradient(120% 120% at 50% 40%, #f0e9df 0%, #e8e0d6 60%, #e2dace 100%);
+  border-radius: 12px;
+  padding: 10px;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  box-shadow: inset 0 1px 8px rgba(0,0,0,.06);
+}
+
+/* contenedor de imágenes del carrusel */
+.carousel-images {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+/* cada imagen */
+.carousel-image {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;       /* No recorta: encaja completa */
+  object-position: center;
+  opacity: 0;
+  transform: scale(.985);
+  transition: opacity .25s ease, transform .35s cubic-bezier(.2,.7,.2,1);
+  will-change: opacity, transform;
+  background: transparent;
+}
+.carousel-image.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* dots */
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 0 0;
+}
+.carousel-dots .dot {
+  width: 8px; height: 8px; border-radius: 999px;
+  background: #b9a89a;
+  opacity: .6;
+  transition: transform .2s, opacity .2s, background .2s;
+  cursor: pointer;
+}
+.carousel-dots .dot.active {
+  opacity: 1;
+  background: #5c4033;
+  transform: scale(1.25);
+}
+
+/* Botones prev/next (aparecen solo en desktop) */
+.carousel-nav {
+  position: absolute; inset: 0;
+  display: none;            /* ocultos en mobile */
+  pointer-events: none;
+}
+@media (hover:hover) and (pointer:fine) {
+  .carousel-nav { display: block; }
+  .carousel-btn {
+    position: absolute; top: 50%; translate: 0 -50%;
+    pointer-events: auto;
+    width: 38px; height: 38px; border-radius: 999px;
+    display: grid; place-items: center;
+    background: rgba(255,255,255,.85);
+    border: 1px solid rgba(0,0,0,.06);
+    box-shadow: 0 2px 8px rgba(0,0,0,.12);
+    cursor: pointer;
+  }
+  .carousel-btn svg { width: 18px; height: 18px; fill: #5c4033; }
+  .carousel-btn.prev { left: 8px; }
+  .carousel-btn.next { right: 8px; }
+}
+
+/* Modal layout finito */
+.modal-content {
+  background-color: #f3efe7;
+  padding: clamp(18px, 2.5vw, 28px);
+  border-radius: 12px;
+  width: min(960px, 95vw);
+  max-height: 92vh;
+  overflow: auto;
+}
+.modal-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(16px, 2.2vw, 28px);
+  align-items: start;
+}
+.modal-details { min-width: 0; }
+.modal-details h3 { margin: 0 0 .6rem; }
+.modal-details p { margin: 0 0 .7rem; }
+
+/* Móvil: pila vertical y carrusel grande y cómodo */
+@media (max-width: 768px) {
+  .modal-body {
+    grid-template-columns: 1fr;
+  }
+  .modal-media {
+    max-width: 100%;
+    aspect-ratio: 4/3;
+    max-height: 48vh;
+  }
+}
+
+/* Mejora cards de tienda (imagenes consistentes) */
+#tienda-section .escritorio-card img {
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
+  background: #e9e1d7;
+  border-radius: 8px;
+}
+
 
 
 
