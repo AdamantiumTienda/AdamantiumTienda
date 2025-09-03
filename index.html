@@ -198,33 +198,24 @@
 
 </main>
 
-<!-- MODAL NUEVO -->
-<div class="modal" id="productModal" style="display:none;">
-  <div class="modal-content">
-    <button class="close-button" aria-label="Cerrar">×</button>
+<!-- ===== Product Modal (único) ===== -->
+<div class="modal" id="productModal" aria-hidden="true">
+  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalProductName">
+    <button class="close-button" type="button" aria-label="Cerrar">×</button>
 
     <div class="modal-body">
-      <!-- Columna: Imagen / Carrusel -->
-      <div class="modal-image">
-        <div class="carousel-images" id="carouselContainer">
-          <!-- Las imágenes se inyectan por JS -->
-        </div>
-        <div class="carousel-dots" id="carouselDots"></div>
-      </div>
+      <!-- Carrusel / media -->
+      <div class="modal-media" id="carouselContainer" aria-live="polite"></div>
 
-      <!-- Columna: Detalles -->
+      <!-- Detalles -->
       <div class="modal-details" id="modalDetails">
         <h3 id="modalProductName">Nombre del Producto</h3>
-
         <p><strong>Medidas:</strong> <span id="modalMedidas"></span></p>
         <p><strong>Materiales:</strong> <span id="modalMateriales"></span></p>
         <p><strong>Descripción:</strong> <span id="modalDescripcionLarga"></span></p>
-
-        <p>
-          <small>
-            <strong>Para otra variedad de maderas duras:</strong>
-            Consultas con Sabri 👉
-            <a href="https://wa.me/541122878806" target="_blank" rel="noopener">1122878806</a>
+        <p class="nota-maderas">
+          <small><strong>Para otra variedad de maderas duras:</strong>
+            Consultas con Sabri 👉 <a href="https://wa.me/541122878806" target="_blank" rel="noopener">1122878806</a>
           </small>
         </p>
 
@@ -239,7 +230,6 @@
               <option value="180x60">180 × 60 cm</option>
             </select>
           </div>
-
           <div class="option">
             <label for="modalColor">Color:</label>
             <select id="modalColor" name="color" required>
@@ -258,21 +248,19 @@
         </div>
 
         <div class="precio-wrapper">
-          <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
-            <p class="precio" id="modalPrecio" style="margin:0;"></p>
-            <span class="envio-info">
-              * Envío a cargo del comprador. Costo variable según zona.<br/>
-              Entregas tercerizadas a todo el país. <br/>
-              Tiempo de entrega: 20 días.*
-            </span>
-          </div>
+          <p class="precio" id="modalPrecio"></p>
+          <span class="envio-info">
+            * Envío a cargo del comprador (según zona).<br>
+            Entregas tercerizadas a todo el país. Tiempo estimado: 20 días.*
+          </span>
         </div>
 
-        <button class="btn-cta">Comprar</button>
+        <button class="btn-cta" type="button">Comprar</button>
       </div>
     </div>
   </div>
 </div>
+
 
 
 <footer>
@@ -1087,6 +1075,7 @@ window.addEventListener('keydown', e=>{
 
 </body>
 </html>
+
 
 
 
